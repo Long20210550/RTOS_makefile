@@ -30,7 +30,7 @@ out/RTOS.hex: out/RTOS.elf
 run:
 	$(ST_LINK) -ME
 	@echo 'Erase chip done, start flash bin'
-	$(ST_LINK) -p out/RTOSv1.hex 0x08000000
+	$(ST_LINK) -p out/RTOS.hex 0x08000000
 	@echo 'Flash done'
 	@echo 'Restart chip'
 	$(ST_LINK) -rst

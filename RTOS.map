@@ -19,7 +19,7 @@ LOAD out/startup_stm32f10x.o
  .isr_vector    0x08000000       0xec out/startup_stm32f10x.o
                 0x08000000                g_pfnVectors
 
-.text           0x080000ec      0x4a8
+.text           0x080000ec      0x4d8
  *(.text*)
  .text          0x080000ec      0x1ec out/main.o
                 0x080000ec                idle_task
@@ -45,80 +45,75 @@ LOAD out/startup_stm32f10x.o
                 0x080004c8                SystemCoreClockUpdate
  .text          0x08000520        0x0 out/startup_stm32f10x.o
  .text.Reset_Handler
-                0x08000520       0x74 out/startup_stm32f10x.o
+                0x08000520       0x44 out/startup_stm32f10x.o
                 0x08000520                Reset_Handler
-                0x0800052c                NMI_Handler
-                0x0800052e                HardFault_Handler
-                0x08000530                MemManage_Handler
-                0x08000532                BusFault_Handler
-                0x08000534                UsageFault_Handler
-                0x08000536                SVC_Handler
-                0x08000538                DebugMon_Handler
-                0x0800053e                WWDG_IRQHandler
-                0x08000540                PVD_IRQHandler
-                0x08000542                TAMPER_IRQHandler
-                0x08000544                RTC_IRQHandler
-                0x08000546                FLASH_IRQHandler
-                0x08000548                RCC_IRQHandler
-                0x0800054a                EXTI0_IRQHandler
-                0x0800054c                EXTI1_IRQHandler
-                0x0800054e                EXTI2_IRQHandler
-                0x08000550                EXTI3_IRQHandler
-                0x08000552                EXTI4_IRQHandler
-                0x08000554                DMA1_Channel1_IRQHandler
-                0x08000556                DMA1_Channel2_IRQHandler
-                0x08000558                DMA1_Channel3_IRQHandler
-                0x0800055a                DMA1_Channel4_IRQHandler
-                0x0800055c                DMA1_Channel5_IRQHandler
-                0x0800055e                DMA1_Channel6_IRQHandler
-                0x08000560                DMA1_Channel7_IRQHandler
-                0x08000562                ADC1_2_IRQHandler
-                0x08000564                USB_HP_CAN1_TX_IRQHandler
-                0x08000566                USB_LP_CAN1_RX0_IRQHandler
-                0x08000568                CAN1_RX1_IRQHandler
-                0x0800056a                CAN1_SCE_IRQHandler
-                0x0800056c                EXTI9_5_IRQHandler
-                0x0800056e                TIM1_BRK_IRQHandler
-                0x08000570                TIM1_UP_IRQHandler
-                0x08000572                TIM1_TRG_COM_IRQHandler
-                0x08000574                TIM1_CC_IRQHandler
-                0x08000576                TIM2_IRQHandler
-                0x08000578                TIM3_IRQHandler
-                0x0800057a                TIM4_IRQHandler
-                0x0800057c                I2C1_EV_IRQHandler
-                0x0800057e                I2C1_ER_IRQHandler
-                0x08000580                I2C2_EV_IRQHandler
-                0x08000582                I2C2_ER_IRQHandler
-                0x08000584                SPI1_IRQHandler
-                0x08000586                SPI2_IRQHandler
-                0x08000588                USART1_IRQHandler
-                0x0800058a                USART2_IRQHandler
-                0x0800058c                USART3_IRQHandler
-                0x0800058e                EXTI15_10_IRQHandler
-                0x08000590                RTCAlarm_IRQHandler
-                0x08000592                USBWakeUp_IRQHandler
+ .text.Default_Handler
+                0x08000564       0x60 out/startup_stm32f10x.o
+                0x08000566                NMI_Handler
+                0x08000568                HardFault_Handler
+                0x0800056a                MemManage_Handler
+                0x0800056c                BusFault_Handler
+                0x0800056e                UsageFault_Handler
+                0x08000570                SVC_Handler
+                0x08000572                DebugMon_Handler
+                0x08000578                WWDG_IRQHandler
+                0x0800057a                PVD_IRQHandler
+                0x0800057c                TAMPER_IRQHandler
+                0x0800057e                RTC_IRQHandler
+                0x08000580                FLASH_IRQHandler
+                0x08000582                RCC_IRQHandler
+                0x08000584                EXTI0_IRQHandler
+                0x08000586                EXTI1_IRQHandler
+                0x08000588                EXTI2_IRQHandler
+                0x0800058a                EXTI3_IRQHandler
+                0x0800058c                EXTI4_IRQHandler
+                0x0800058e                DMA1_Channel1_IRQHandler
+                0x08000590                DMA1_Channel2_IRQHandler
+                0x08000592                DMA1_Channel3_IRQHandler
+                0x08000594                DMA1_Channel4_IRQHandler
+                0x08000596                DMA1_Channel5_IRQHandler
+                0x08000598                DMA1_Channel6_IRQHandler
+                0x0800059a                DMA1_Channel7_IRQHandler
+                0x0800059c                ADC1_2_IRQHandler
+                0x0800059e                USB_HP_CAN1_TX_IRQHandler
+                0x080005a0                USB_LP_CAN1_RX0_IRQHandler
+                0x080005a2                CAN1_RX1_IRQHandler
+                0x080005a4                CAN1_SCE_IRQHandler
+                0x080005a6                EXTI9_5_IRQHandler
+                0x080005a8                TIM1_BRK_IRQHandler
+                0x080005aa                TIM1_UP_IRQHandler
+                0x080005ac                TIM1_TRG_COM_IRQHandler
+                0x080005ae                TIM1_CC_IRQHandler
+                0x080005b0                TIM2_IRQHandler
+                0x080005b2                TIM3_IRQHandler
+                0x080005b4                I2C1_EV_IRQHandler
+                0x080005b6                I2C1_ER_IRQHandler
+                0x080005b8                SPI1_IRQHandler
+                0x080005ba                USART1_IRQHandler
+                0x080005bc                USART2_IRQHandler
+                0x080005be                EXTI15_10_IRQHandler
+                0x080005c0                RTCAlarm_IRQHandler
+                0x080005c2                USBWakeUp_IRQHandler
  *(.rodata*)
-                0x08000594                _etext = .
+ *(.glue_7)
+ .glue_7        0x080005c4        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x080005c4        0x0 linker stubs
+                0x080005c4                _etext = .
 
-.glue_7         0x08000594        0x0
- .glue_7        0x08000594        0x0 linker stubs
+.vfp11_veneer   0x080005c4        0x0
+ .vfp11_veneer  0x080005c4        0x0 linker stubs
 
-.glue_7t        0x08000594        0x0
- .glue_7t       0x08000594        0x0 linker stubs
+.v4_bx          0x080005c4        0x0
+ .v4_bx         0x080005c4        0x0 linker stubs
 
-.vfp11_veneer   0x08000594        0x0
- .vfp11_veneer  0x08000594        0x0 linker stubs
+.iplt           0x080005c4        0x0
+ .iplt          0x080005c4        0x0 out/main.o
 
-.v4_bx          0x08000594        0x0
- .v4_bx         0x08000594        0x0 linker stubs
+.rel.dyn        0x080005c4        0x0
+ .rel.iplt      0x080005c4        0x0 out/main.o
 
-.iplt           0x08000594        0x0
- .iplt          0x08000594        0x0 out/main.o
-
-.rel.dyn        0x08000594        0x0
- .rel.iplt      0x08000594        0x0 out/main.o
-
-.data           0x20000000       0x14 load address 0x08000594
+.data           0x20000000       0x14 load address 0x080005c4
                 0x20000000                _sdata = .
  *(.data*)
  .data          0x20000000        0x0 out/main.o
@@ -127,12 +122,14 @@ LOAD out/startup_stm32f10x.o
                 0x20000000                AHBPrescTable
                 0x20000010                SystemCoreClock
  .data          0x20000014        0x0 out/startup_stm32f10x.o
+ *(.data.*)
                 0x20000014                _edata = .
+                0x080005c4                _sidata = LOADADDR (.data)
 
-.igot.plt       0x20000014        0x0 load address 0x080005a8
+.igot.plt       0x20000014        0x0 load address 0x080005d8
  .igot.plt      0x20000014        0x0 out/main.o
 
-.bss            0x20000014       0x38 load address 0x080005a8
+.bss            0x20000014       0x38 load address 0x080005d8
                 0x20000014                _sbss = .
  *(.bss*)
  .bss           0x20000014       0x38 out/main.o
