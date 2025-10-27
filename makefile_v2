@@ -8,10 +8,10 @@ DEFS     := -DSTM32F10X_LD
 Core := C:/Users/ADMIN/AppData/Local/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include/
 Device_driver:= C:/Users/ADMIN/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include 
 CPPFLAGS := -Iinc -I$(Core) -I$(Device_driver) $(DEFS)
-CFLAGS = -c -mcpu=cortex-m3 -mthumb -O2 -g -Wall
-LD_FILE = stm32f103_ls.ld
-LDFLAGS:= --specs=nano.specs -T$(LD_FILE) -Wl,-Map=RTOS.map
-build: out/main.o out/function.o out/system_stm32f10x.o out/startup_stm32f10x.o out/syscalls.o
+CFLAGS = -c -mcpu=cortex-m3 -mthumb -O2 -Wall
+LD_FILE = linker.ld
+LDFLAGS:= -nostdlib -T$(LD_FILE) -Wl,-Map=RTOS.map
+build: out/main.o out/function.o out/system_stm32f10x.o out/startup_stm32f10x.o
 	@echo 'Build PASS'
 build_hex: out/RTOS.hex
 	@echo 'Build hex pass'
@@ -21,12 +21,10 @@ out/function.o:src/function.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o out/function.o src/function.c
 out/system_stm32f10x.o:src/system_stm32f10x.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o out/system_stm32f10x.o src/system_stm32f10x.c
-out/startup_stm32f10x.o: src/startup_stm32f103c6.c
-	$(CC) -mcpu=cortex-m3 -mthumb -c -o out/startup_stm32f10x.o src/startup_stm32f103c6.c
-out/syscalls.o: src/syscalls.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o out/syscalls.o src/syscalls.c
-output: out/main.o out/function.o out/system_stm32f10x.o out/startup_stm32f10x.o out/syscalls.o
-	$(CC) $(LDFLAGS) -o out/RTOS.elf out/main.o out/function.o out/system_stm32f10x.o out/startup_stm32f10x.o out/syscalls.o
+out/startup_stm32f10x.o: src/startup_gcc.s
+	$(AS) -mcpu=cortex-m3 -mthumb -o out/startup_stm32f10x.o src/startup_gcc.s
+output: out/main.o out/function.o out/system_stm32f10x.o out/startup_stm32f10x.o
+	$(CC) $(LDFLAGS) -o out/RTOS.elf out/main.o out/function.o out/system_stm32f10x.o out/startup_stm32f10x.o
 out/RTOS.hex: out/RTOS.elf
 	$(OBJ) -O ihex out/RTOS.elf out/RTOS.hex
 run:
@@ -39,9 +37,3 @@ run:
 clean:
 	rm -rf out
 	mkdir -p out
-	rm RTOS.map
-run_prog:
-	make build
-	make output
-	make build_hex
-	make run
